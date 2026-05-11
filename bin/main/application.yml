@@ -1,20 +1,18 @@
 spring:
     application:
         name: weather-api
+    data:
+        redis:
+            host: ${REDIS_HOST:localhost}
+            port: ${REDIS_PORT:6379}
+            password: ${REDIS_PASSWORD:}
 
 server:
-  port: 8080
+    port: 8080
 
 weather:
-  api:
-    base-url: ${WEATHER_API_BASE_URL}
-    key: ${WEATHER_API_KEY}
-  cache:
-    ttl-seconds: ${WEATHER_CACHE_TTL_SECONDS:43200}
-
-spring:
-  data:
-    redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
+    api:
+        base-url: ${WEATHER_API_BASE_URL}
+        key: ${WEATHER_API_KEY}
+        cache:
+        ttl-seconds: ${WEATHER_CACHE_TTL_SECONDS:43200}
