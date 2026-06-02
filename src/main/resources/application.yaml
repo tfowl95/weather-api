@@ -4,3 +4,7 @@ spring:
 
 server:
   port: ${SERVER_PORT:8080}
+
+weather-api:
+  baseURL: ${WEATHER_API_BASE_URL:https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/}
+  apiKey: ${WEATHER_API_KEY:}
