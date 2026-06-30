@@ -13,3 +13,4 @@ server:
 weather-api:
   baseURL: ${WEATHER_API_BASE_URL:https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/}
   apiKey: ${WEATHER_API_KEY:}
+  cacheTtlSeconds: ${WEATHER_CACHE_TTL_SECONDS:5}

@@ -1,5 +1,7 @@
 package com.tfowl95.weather_api.service;
 
+import java.time.Duration;
+
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,7 @@ public class WeatherService {
         // check redis and return if it is there
         String cacheKey = "weather:cache:" + location;
         String cachedResponse = redis.opsForValue().get(cacheKey);
-        if (cachedResponse != null) return cachedResponse;
+        if (cachedResponse != null) return cachedResponse + "Cached";
 
         // grab third party info and store it in redis
         String response = restClient.get()
@@ -37,7 +39,7 @@ public class WeatherService {
             .retrieve()
             .body(String.class);
             
-        redis.opsForValue().set(cacheKey, response);
+        redis.opsForValue().set(cacheKey, response, Duration.ofSeconds(properties.cacheTtlSeconds()));
         
         return response;
     }
