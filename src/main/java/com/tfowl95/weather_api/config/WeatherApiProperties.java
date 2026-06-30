@@ -11,5 +11,6 @@ import jakarta.validation.constraints.NotBlank;
 public record WeatherApiProperties (
     @NotBlank String baseUrl,
     @NotBlank String apiKey,
-    @Min(1) int cacheTtlSeconds
+    @Min(1) int cacheTtlSeconds,
+    @Min(1) int rateLimit
 ) {}
