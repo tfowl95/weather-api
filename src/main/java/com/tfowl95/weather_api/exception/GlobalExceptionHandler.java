@@ -1,7 +1,6 @@
 package com.tfowl95.weather_api.exception;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,6 +13,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity
             .status(HttpStatus.TOO_MANY_REQUESTS)
             .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidLocationException.class)
+    public ResponseEntity<String> handleInvalidLocation(InvalidLocationException ex) {
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UpstreamWeatherException.class)
+    public ResponseEntity<String> handleUpstreamWeather(UpstreamWeatherException ex) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_GATEWAY)
+                .body(ex.getMessage());
     }
 
 }
