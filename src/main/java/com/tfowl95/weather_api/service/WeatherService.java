@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import com.tfowl95.weather_api.config.WeatherApiProperties;
+import com.tfowl95.weather_api.exception.RateLimitExceededException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -42,7 +43,7 @@ public class WeatherService {
         }
 
         if (requestCount != null && requestCount > properties.rateLimit()) {
-            return "rate limit exceeded";
+            throw new RateLimitExceededException(properties.rateLimit());
         }
 
         // check redis and return stored value if available
